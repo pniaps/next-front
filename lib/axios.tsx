@@ -10,3 +10,7 @@ const axios = Axios.create({
 })
 
 export default axios
+
+export const backendUrl = (url: string) => (
+    process.env.NEXT_PUBLIC_BACKEND_URL + url
+)

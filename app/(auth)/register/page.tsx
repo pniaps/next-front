@@ -46,6 +46,7 @@ const Page = () => {
                     onChange={event => setName(event.target.value)}
                     required
                     autoFocus
+                    autocomplete="name"
                 />
 
                 <InputError messages={errors.name} className="mt-2" />
@@ -62,6 +63,7 @@ const Page = () => {
                     className="block mt-1 w-full"
                     onChange={event => setEmail(event.target.value)}
                     required
+                    autocomplete="email"
                 />
 
                 <InputError messages={errors.email} className="mt-2" />
@@ -99,6 +101,7 @@ const Page = () => {
                         setPasswordConfirmation(event.target.value)
                     }
                     required
+                    autoComplete="new-password"
                 />
 
                 <InputError
