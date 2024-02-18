@@ -2,9 +2,9 @@
 
 import {Table, TableHeader, TableBody, TableColumn, TableRow, TableCell, getKeyValue} from "@nextui-org/table";
 
-export default function TableWrapper({columns, rows}) {
+export default function TableWrapper({columns, rows, label = ''}) {
     return (<>
-            <Table>
+            <Table aria-label={label}>
                 <TableHeader columns={columns}>
                     {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
                 </TableHeader>
