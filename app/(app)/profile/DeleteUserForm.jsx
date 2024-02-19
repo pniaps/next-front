@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import {useRef, useState} from 'react';
 import DangerButton from '@/components/DangerButton';
 import InputError from '@/components/InputError';
 import InputLabel from '@/components/InputLabel';
@@ -7,10 +7,11 @@ import SecondaryButton from '@/components/SecondaryButton';
 import TextInput from '@/components/TextInput';
 import useForm from "@/hooks/form";
 import {useRouter} from "next/navigation";
+
 export default function DeleteUserForm({ className = '' }) {
     const router = useRouter()
     const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
-    const passwordInput = useRef();
+    const passwordInput = useRef<HTMLInputElement>(null);
 
     const {
         data,
@@ -30,9 +31,10 @@ export default function DeleteUserForm({ className = '' }) {
     const deleteUser = (e) => {
         e.preventDefault();
 
+        // @ts-ignore
         destroy('/profile', {
             onSuccess: () => router.push('/'),
-            onError: () => passwordInput.current.focus(),
+            onError: () => passwordInput.current?.focus(),
             onFinish: () => reset(),
         });
     };
@@ -78,7 +80,7 @@ export default function DeleteUserForm({ className = '' }) {
                             value={data.password}
                             onChange={e => setData('password', e.target.value)}
                             className="mt-1 block w-3/4"
-                            isFocused
+                            autoFocus
                             placeholder="Password"
                         />
 

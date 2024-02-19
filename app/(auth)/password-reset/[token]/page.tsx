@@ -17,7 +17,7 @@ const PasswordReset = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
-    const [errors, setErrors] = useState([])
+    const [errors, setErrors] = useState<any>([])
     const [status, setStatus] = useState(null)
 
     const submitForm = event => {
@@ -33,8 +33,8 @@ const PasswordReset = () => {
     }
 
     useEffect(() => {
-        setEmail(searchParams.get('email'))
-    }, [searchParams.get('email')])
+        setEmail(searchParams.get('email') || '')
+    }, [searchParams])
 
     return (
         <>

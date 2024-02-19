@@ -7,11 +7,12 @@ import ResponsiveNavLink, {
 } from '@/components/ResponsiveNavLink'
 import DropdownLink, { DropdownButton } from '@/components/DropdownLink'
 import { useAuth } from '@/hooks/auth'
-import { useRouter } from 'next/navigation'
+import {usePathname, useRouter} from 'next/navigation'
 import { useState } from 'react'
 
-const Navigation = ({ user }) => {
+const Navigation = ({ user }:{user:any}) => {
     const router = useRouter()
+    const pathname = usePathname()
 
     const { logout } = useAuth()
 
@@ -34,7 +35,7 @@ const Navigation = ({ user }) => {
                         <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                             <NavLink
                                 href="/dashboard"
-                                active={router.pathname === '/dashboard'}>
+                                active={pathname === '/dashboard'}>
                                 Dashboard
                             </NavLink>
                         </div>
@@ -42,7 +43,7 @@ const Navigation = ({ user }) => {
                         <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                             <NavLink
                                 href="/users"
-                                active={router.pathname === '/users'}>
+                                active={pathname === '/users'}>
                                 Users
                             </NavLink>
                         </div>
@@ -52,7 +53,6 @@ const Navigation = ({ user }) => {
                     <div className="hidden sm:flex sm:items-center sm:ml-6">
                         <Dropdown
                             align="right"
-                            width="48"
                             trigger={
                                 <button className="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 focus:outline-none transition duration-150 ease-in-out">
                                     <div>{user?.name}</div>
@@ -118,7 +118,7 @@ const Navigation = ({ user }) => {
                     <div className="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink
                             href="/dashboard"
-                            active={router.pathname === '/dashboard'}>
+                            active={pathname === '/dashboard'}>
                             Dashboard
                         </ResponsiveNavLink>
                     </div>
@@ -153,7 +153,7 @@ const Navigation = ({ user }) => {
                         </div>
 
                         <div className="mt-3 space-y-1">
-                            <ResponsiveNavLink href="/profile" active={router.pathname === '/profile'}>Profile</ResponsiveNavLink>
+                            <ResponsiveNavLink href="/profile" active={pathname === '/profile'}>Profile</ResponsiveNavLink>
                             {/* Authentication */}
                             <ResponsiveNavButton onClick={logout}>
                                 Logout

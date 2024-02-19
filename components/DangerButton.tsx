@@ -1,4 +1,4 @@
-export default function DangerButton({ className = '', disabled, children, ...props }) {
+export default function DangerButton({ className = '', disabled = false, children, ...props }) {
     return (
         <button
             {...props}

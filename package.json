@@ -6,7 +6,8 @@
     "dev": "next dev --port 5000",
     "build": "next build",
     "start": "next start --port 5000",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint:fix": "next lint --fix"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.18",

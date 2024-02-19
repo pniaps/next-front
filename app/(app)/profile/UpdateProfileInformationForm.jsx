@@ -6,11 +6,12 @@ import { Transition } from '@headlessui/react';
 import {useAuth} from "@/hooks/auth";
 import {backendUrl} from "@/lib/axios";
 import useForm from "@/hooks/form";
+import Link from "next/link";
 
 export default function UpdateProfileInformation({ mustVerifyEmail, status, className = '' }) {
     const { user } = useAuth({ middleware: 'auth' })
 
-    const { data, setData, post, errors, processing, recentlySuccessful } = useForm({
+    const { data, setData, put, errors, processing, recentlySuccessful } = useForm({
         name: user.name,
         email: user.email,
     });
@@ -18,7 +19,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
     const submit = (e) => {
         e.preventDefault();
 
-        post(backendUrl('/profile'));
+        put(backendUrl('/profile'));
     };
 
     return (
@@ -27,7 +28,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                 <h2 className="text-lg font-medium text-gray-900">Profile Information</h2>
 
                 <p className="mt-1 text-sm text-gray-600">
-                    Update your account's profile information and email address.
+                    Update your account&apos;s profile information and email address.
                 </p>
             </header>
 
@@ -41,7 +42,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         value={data.name}
                         onChange={(e) => setData('name', e.target.value)}
                         required
-                        isFocused
+                        autoFocus
                         autoComplete="name"
                     />
 

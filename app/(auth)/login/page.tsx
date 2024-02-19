@@ -21,16 +21,8 @@ const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [shouldRemember, setShouldRemember] = useState(false)
-    const [errors, setErrors] = useState([])
+    const [errors, setErrors] = useState<any>([])
     const [status, setStatus] = useState(null)
-
-    useEffect(() => {
-        if (router.reset?.length > 0 && errors.length === 0) {
-            setStatus(atob(router.reset))
-        } else {
-            setStatus(null)
-        }
-    })
 
     const submitForm = async event => {
         event.preventDefault()
@@ -119,7 +111,7 @@ const Login = () => {
                     <Link
                         href="/register"
                         className="underline text-sm text-gray-600 hover:text-gray-900">
-                        Don't have an account? Register
+                        Don&apos;t have an account? Register
                     </Link>
                 </div>
             </form>

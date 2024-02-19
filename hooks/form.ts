@@ -1,6 +1,12 @@
-import {useCallback, useEffect, useRef, useState} from "react";
+import {useCallback, useEffect, useRef, useState} from 'react'
 import axios from "@/lib/axios";
-import Axios, {AxiosHeaders, AxiosProgressEvent, RawAxiosRequestHeaders} from "axios";
+import Axios, {AxiosProgressEvent} from "axios";
+
+declare module 'axios' {
+    export interface AxiosProgressEvent {
+        percentage: number | undefined
+    }
+}
 
 
 type RequestPayload = Record<string, FormDataConvertible> | FormData
@@ -83,15 +89,15 @@ type Method = 'get' | 'post' | 'put' | 'patch' | 'delete'
 type Errors = Record<string, string>
 
 type RequestOptions = {
-    method: Method
-    data: any
-    headers: Record<string, string>
-    onStart: () => void
-    onProgress: (progress: AxiosProgressEvent) => void
-    onSuccess: () => void
-    onError: (errors: Errors) => void
-    onCancel: () => void
-    onFinish: () => void
+    method?: Method
+    data?: any
+    headers?: Record<string, string>
+    onStart?: () => void
+    onProgress?: (progress: AxiosProgressEvent) => void
+    onSuccess?: () => void
+    onError?: (errors: Errors) => void
+    onCancel?: () => void
+    onFinish?: () => void
 }
 
 export interface FormProps<TForm extends FormDataType> {
@@ -121,12 +127,12 @@ export interface FormProps<TForm extends FormDataType> {
 }
 
 export default function useForm<TForm extends FormDataType>(
-    initialValues: object
+    initialValues: TForm
 ): FormProps<TForm> {
-    const isMounted = useRef(null)
+    const isMounted = useRef<boolean>()
     const [defaults, setDefaults] = useState(initialValues || ({} as TForm))
-    const cancelToken = useRef(null)
-    const recentlySuccessfulTimeoutId = useRef(null)
+    const cancelToken = useRef<any>()
+    const recentlySuccessfulTimeoutId = useRef<any>()
     const [data, setData] = useState(defaults)
     const [errors, setErrors] = useState({} as Partial<Record<keyof TForm, string>>)
     const [hasErrors, setHasErrors] = useState(false)
@@ -196,7 +202,7 @@ export default function useForm<TForm extends FormDataType>(
     }
 
     const submit = useCallback(
-        (method: Method, url: string, options = {}) => {
+        (method: Method, url: string, options:any = {}) => {
             const _options = {
                 ...options,
                 onStart: () => {
@@ -240,7 +246,6 @@ export default function useForm<TForm extends FormDataType>(
                         setProcessing(false)
                         setProgress(null)
                         if (errors.response.status === 422) {
-                            console.log(errors.response.data.errors);
                             setErrors(errors.response.data.errors)
                         }else{
                             setErrors(errors)
