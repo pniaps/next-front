@@ -6,9 +6,9 @@ import DeleteUserForm from "./DeleteUserForm";
 
 export default function Profile({auth, mustVerifyEmail, status}) {
     return (
-        <div className="py-5">
-            <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+        <div className="my-3 lg:my-8">
+            <div className="max-w-7xl mx-auto px-3 lg:px-8 space-y-6">
+                <div className="p-4 lg:p-8 bg-white shadow sm:rounded-lg">
                     <UpdateProfileInformation
                         mustVerifyEmail={mustVerifyEmail}
                         status={status}
@@ -16,11 +16,11 @@ export default function Profile({auth, mustVerifyEmail, status}) {
                     />
                 </div>
 
-                <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                <div className="p-4 lg:p-8 bg-white shadow sm:rounded-lg">
                     <UpdatePasswordForm className="max-w-xl"/>
                 </div>
 
-                <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                <div className="p-4 lg:p-8 bg-white shadow sm:rounded-lg">
                     <DeleteUserForm className="max-w-xl"/>
                 </div>
             </div>

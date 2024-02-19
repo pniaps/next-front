@@ -121,6 +121,11 @@ const Navigation = ({ user }:{user:any}) => {
                             active={pathname === '/dashboard'}>
                             Dashboard
                         </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            href="/users"
+                            active={pathname === '/users'}>
+                            Users
+                        </ResponsiveNavLink>
                     </div>
 
                     {/* Responsive Settings Options */}

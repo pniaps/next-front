@@ -6,6 +6,9 @@ import Card from "@/components/Card";
 import LineChart from "@/components/LineChart";
 import axios from "@/lib/axios";
 import useSWR from "swr";
+import Input from "@/components/Input";
+import PrimaryButton from "@/components/PrimaryButton";
+import useForm from "@/hooks/form";
 
 export default function Dashboard() {
 
@@ -36,11 +39,18 @@ export default function Dashboard() {
         }
     ]
 
-    return (
-        <div className="my-5">
-            <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    const {data:usersData, processing, setData, get} = useForm({ numberUsers: 30})
+    const generateUsers = () => {
+        get('/api/createUsers/'+usersData.numberUsers, {
 
-                <div className="mt-3 grid grid-cols-1 gap-5 md:grid-cols-2">
+        });
+    }
+
+    return (
+        <div className="my-3 lg:my-8">
+            <div className="max-w-7xl mx-auto px-3 lg:px-8 space-y-6">
+
+                <div className="my-3 lg:my-6 grid grid-cols-1 gap-3 lg:gap-6 md:grid-cols-3">
 
                     <Widget
                         icon={<BsFillPeopleFill className="h-7 w-7"/>}
@@ -54,9 +64,24 @@ export default function Dashboard() {
                         subtitle={data?.usersLast30Days}
                     />
 
+                    <Card extra="!flex-row flex-grow items-center h-[90px] p-[18px] gap-5">
+
+                        <Input
+                            type="number"
+                            min="10"
+                            max="200"
+                            value={usersData.numberUsers}
+                            className="block mt-1 w-full"
+                            onChange={(event) => setData('numberUsers',event.target.value)}
+                            required
+                        />
+
+                        <PrimaryButton disabled={processing} onClick={() => generateUsers()} className="text-nowrap">Generate users</PrimaryButton>
+
+                    </Card>
                 </div>
 
-                <Card extra="!p-[20px] mt-5">
+                <Card extra="!p-[20px] my-3 lg:my-6">
 
                     <div
                         className="flex flex-col h-full w-full justify-between sm:flex-wrap lg:flex-nowrap 2xl:overflow-hidden">
