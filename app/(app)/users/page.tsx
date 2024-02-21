@@ -1,9 +1,7 @@
+"use client"
+
 import TableWrapper from "@/components/table";
 import axios from "@/lib/axios";
-
-export const metadata = {
-    title: 'Users | Next',
-}
 
 export default async function usersPage() {
 
